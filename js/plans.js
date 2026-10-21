@@ -157,13 +157,15 @@
 
   function render(room, setupKey, lang) {
     var plan = room.plan;
-    var setup = plan.setups.filter(function (s) { return s.setup === setupKey; })[0] || plan.setups[0];
+    var setup = room.setups.filter(function (s) { return s.setup === setupKey; })[0] || room.setups[0];
     var out = drawWalls(plan);
     setup.items.forEach(function (it) { out.push(drawItem(it, lang)); });
     plan.doors.forEach(function (d) { out = out.concat(drawDoor(plan, d, lang)); });
 
-    // Waar ligt het park? / Where is the park?
-    out.push(text(plan.w / 2, plan.h + 1.15, pick(["Park de Houtkamp", "Park de Houtkamp"], lang), FS * 1.05,
+    // Waar ligt het park? Buiten de parkwand, voorbij het deurlabel / Where is the park? Outside the park wall, past the door label
+    var pw = wall(plan, plan.parkWall);
+    var pp = at(pw, 0.5, -1.0);
+    out.push(text(pp[0], pp[1] + (-pw.ny > 0.3 ? FS * 0.85 : 0), "Park de Houtkamp", FS * 1.05,
       ' text-anchor="middle" font-style="italic" fill="' + C.park + '"'));
 
     // Schaal / Scale
@@ -174,7 +176,7 @@
     out.push(text(1.15, sy + FS * 0.35, "1 m", FS * 0.85, ' fill="' + C.muted + '"'));
 
     var m = 1.6;
-    var vb = [-m, -m + 0.4, plan.w + m * 2, plan.h + m * 2 - 0.2].map(r2).join(" ");
+    var vb = [-m, -m, plan.w + m * 2, plan.h + m * 2].map(r2).join(" ");
     return '<svg class="plan-svg" viewBox="' + vb + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' +
       esc(room.name) + '">' + out.join("") + "</svg>";
   }

@@ -25,16 +25,12 @@
       heroScript: "Welkom in de",
       heroButton: "Ontdek de zaal",
       introTitle: "De zaal in het kort",
-      source: "Bron: brasseriepark.nl",
       sectionsScript: "Stap voor stap",
       sectionsTitle: "Alles voor de opbouw",
       stripScript: "Sfeerimpressie",
       stripTitle: "Zo ziet de Hooiberg eruit",
       allPhotos: "Alle foto's",
       quote: "Goed voorbereid, is half gewonnen.",
-      aboutTitle: "Over dit prototype",
-      aboutText: "Dit is een prototype, gemaakt als schoolproject voor Brasserie Park. Voor nu staat alleen de Hooiberg erin. De video's, de check-list en de uitleg volgen later.",
-      qrLink: "QR-code voor de presentatie",
       tabVideos: "Video's",
       tabPhotos: "Foto's",
       tabPlan: "Plattegrond",
@@ -46,13 +42,14 @@
       comingSoon: "Coming soon",
       opbouwen: "Opbouwen",
       afbouwen: "Afbouwen",
-      videosLead: "Bekijk eerst de video, dan weet je precies wat je moet doen.",
-      videoOp: "Stap voor stap: zo zet je de Hooiberg klaar.",
-      videoAf: "Na afloop: zo ruim je de Hooiberg netjes op.",
+      videosLead: "Kies de opstelling en bekijk eerst de video, dan weet je precies wat je moet doen.",
+      videoOp_diner: "Stap voor stap: zo zet je de Hooiberg klaar voor een diner.",
+      videoAf_diner: "Na het diner: zo ruim je de Hooiberg netjes op.",
+      videoOp_borrel: "Stap voor stap: zo zet je de Hooiberg klaar voor een borrel.",
+      videoAf_borrel: "Na de borrel: zo ruim je de Hooiberg netjes op.",
       videoSoon: "Video volgt",
-      photosLead: "Zo hoort de zaal eruit te zien. Tik op een foto om hem groot te bekijken.",
-      planLead: "Kies de opstelling. Zo staan de tafels en stoelen op de foto's.",
-      planNote: "Getekend op basis van de foto's. Maten en plekken zijn bij benadering.",
+      photosLead: "Kies de opstelling. Zo hoort de zaal eruit te zien; tik op een foto om hem groot te bekijken.",
+      planLead: "Kies de opstelling. Zo zet je de tafels en stoelen neer.",
       planPhoto: "Zo ziet deze opstelling eruit",
       layout: "Opstelling",
       legendTable: "Tafel",
@@ -90,16 +87,12 @@
       heroScript: "Welcome to the",
       heroButton: "Explore the room",
       introTitle: "The room at a glance",
-      source: "Source: brasseriepark.nl",
       sectionsScript: "Step by step",
       sectionsTitle: "Everything for the setup",
       stripScript: "Impressions",
       stripTitle: "This is the Hooiberg",
       allPhotos: "All photos",
       quote: "Well prepared is half the battle.",
-      aboutTitle: "About this prototype",
-      aboutText: "This is a prototype, made as a school project for Brasserie Park. For now it only covers the Hooiberg. The videos, the checklist and the info will follow later.",
-      qrLink: "QR code for the presentation",
       tabVideos: "Videos",
       tabPhotos: "Photos",
       tabPlan: "Floor plan",
@@ -111,13 +104,14 @@
       comingSoon: "Coming soon",
       opbouwen: "Setup",
       afbouwen: "Teardown",
-      videosLead: "Watch the video first so you know exactly what to do.",
-      videoOp: "Step by step: how to set up the Hooiberg.",
-      videoAf: "Afterwards: how to clear the Hooiberg properly.",
+      videosLead: "Choose the layout and watch the video first so you know exactly what to do.",
+      videoOp_diner: "Step by step: how to set up the Hooiberg for a dinner.",
+      videoAf_diner: "After the dinner: how to clear the Hooiberg properly.",
+      videoOp_borrel: "Step by step: how to set up the Hooiberg for drinks.",
+      videoAf_borrel: "After the drinks: how to clear the Hooiberg properly.",
       videoSoon: "Video coming soon",
-      photosLead: "This is how the room should look. Tap a photo to see it full size.",
-      planLead: "Choose the layout. This is where the tables and chairs are in the photos.",
-      planNote: "Drawn from the photos. Sizes and positions are approximate.",
+      photosLead: "Choose the layout. This is how the room should look; tap a photo to see it full size.",
+      planLead: "Choose the layout. This is where the tables and chairs go.",
       planPhoto: "What this layout looks like",
       layout: "Layout",
       legendTable: "Table",
@@ -165,7 +159,6 @@
     list: icon('<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/>'),
     info: icon('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>'),
     print: icon('<path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/>'),
-    qr: icon('<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.5M14 20.5h.5M17.5 17.5H21V21h-3.5z"/>'),
     play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>'
   };
 
@@ -179,13 +172,28 @@
 
   // ---------- Hulpjes / Helpers ----------
 
-  var state = { lang: "nl", setup: ROOM.plan.setups[0].setup };
+  var SETUP_KEYS = ROOM.setups.map(function (s) { return s.setup; });
+  var state = { lang: "nl", setup: SETUP_KEYS[0] };
 
-  // Alle foto's op een rij, voor de fotoviewer / All photos in one list, for the photo viewer
-  var PHOTOS = [];
-  ROOM.photoGroups.forEach(function (g) {
-    g.photos.forEach(function (p) { PHOTOS.push(p); });
-  });
+  function currentSetup() {
+    return ROOM.setups.filter(function (s) { return s.setup === state.setup; })[0] || ROOM.setups[0];
+  }
+
+  // Foto's op een rij voor de fotoviewer: per opstelling, of alles / Photos in one list for the viewer: per layout, or all
+  function photosOf(setup) {
+    var list = [];
+    setup.photoGroups.forEach(function (g) {
+      g.photos.forEach(function (p) { list.push(p); });
+    });
+    return list;
+  }
+
+  var ALL_PHOTOS = [];
+  ROOM.setups.forEach(function (s) { ALL_PHOTOS = ALL_PHOTOS.concat(photosOf(s)); });
+
+  function photoList(name) {
+    return name === "all" ? ALL_PHOTOS : photosOf(currentSetup());
+  }
 
   function load(key, fallback) {
     try {
@@ -230,8 +238,8 @@
       '.jpg 1600w" sizes="' + sizes + '" alt="' + esc(alt || "") + '"' + (eager ? "" : ' loading="lazy"') + ">";
   }
 
-  function photoIndex(id) {
-    for (var i = 0; i < PHOTOS.length; i++) if (PHOTOS[i].id === id) return i;
+  function photoIndex(list, id) {
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return i;
     return 0;
   }
 
@@ -247,7 +255,10 @@
     var parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
     // Oude links (#/zaal/hooiberg/fotos) blijven werken / Old links keep working
     if (parts[0] === "zaal") parts = parts.slice(2);
-    if (SECTIONS.indexOf(parts[0]) !== -1) return { page: parts[0] };
+    // Opstelling in het adres, bv. #/fotos/borrel / Layout in the address, e.g. #/fotos/borrel
+    if (SECTIONS.indexOf(parts[0]) !== -1) {
+      return { page: parts[0], setup: SETUP_KEYS.indexOf(parts[1]) !== -1 ? parts[1] : null };
+    }
     if (parts[0] === "qr") return { page: "qr" };
     return { page: "home" };
   }
@@ -267,8 +278,7 @@
       '<ul class="facts-row"><li><span>' + esc(t("size")) + "</span><strong>" + esc(L(r.size)) + "</strong></li>" +
       r.capacity.map(function (c) {
         return "<li><span>" + esc(t("setup_" + c.setup)) + "</span><strong>" + esc(t("upTo", { n: c.value })) + "</strong></li>";
-      }).join("") + "</ul>" +
-      '<p class="source">' + esc(t("source")) + "</p></div></section>" +
+      }).join("") + "</ul></div></section>" +
 
       '<section class="band band-cream" id="sections"><div class="wrap">' +
       titleBlock(t("sectionsScript"), t("sectionsTitle")) +
@@ -283,19 +293,14 @@
 
       '<section class="band band-dark"><div class="wrap">' +
       titleBlock(t("stripScript"), t("stripTitle"), "h2", true) + "</div>" +
-      '<ul class="strip">' + PHOTOS.slice(0, 10).map(function (p, i) {
-        return '<li><button type="button" class="strip-item" data-photo="' + i + '" aria-label="' + esc(L(p.caption)) + '">' +
+      '<ul class="strip">' + ALL_PHOTOS.slice(0, 10).map(function (p, i) {
+        return '<li><button type="button" class="strip-item" data-photo="' + i + '" data-list="all" aria-label="' + esc(L(p.caption)) + '">' +
           img(p.id, "280px", L(p.caption)) + "</button></li>";
       }).join("") + "</ul>" +
       '<div class="wrap"><a class="btn btn-light" href="#/fotos">' + esc(t("allPhotos")) + ICON.chevron + "</a></div></section>" +
 
       '<section class="quote-band">' + img(r.sectionPhotos.quote, "100vw") +
-      '<p class="quote">“' + esc(t("quote")) + '”</p></section>' +
-
-      '<section class="band band-cream"><div class="wrap about">' +
-      '<img class="about-logo" src="assets/logo-brasserie-park.svg" alt="Brasserie Park" width="88" height="82">' +
-      '<div><h2 class="card-title">' + esc(t("aboutTitle")) + "</h2><p>" + esc(t("aboutText")) + "</p>" +
-      '<a class="text-link" href="#/qr">' + ICON.qr + esc(t("qrLink")) + "</a></div></div></section>";
+      '<p class="quote">“' + esc(t("quote")) + '”</p></section>';
   }
 
   // ---------- Onderdelen / Sections ----------
@@ -306,8 +311,16 @@
       '<div class="banner-inner">' + titleBlock(ROOM.name, t(meta.label), "h1", true) + "</div></header>";
   }
 
+  // Keuze Diner / Borrel, gedeeld door video's, foto's en plattegrond
+  // Dinner / Drinks choice, shared by videos, photos and floor plan
+  function setupPicker() {
+    return '<div class="seg" role="group" aria-label="' + esc(t("layout")) + '">' + SETUP_KEYS.map(function (key) {
+      return '<button type="button" data-setup="' + key + '" aria-pressed="' + (key === state.setup) + '">' + esc(t("setup_" + key)) + "</button>";
+    }).join("") + "</div>";
+  }
+
   function videoSlot(phase) {
-    var v = ROOM.videos[phase];
+    var v = currentSetup().videos[phase];
     var media;
     if (!v.src) {
       media = '<div class="video-ph">' + img(v.poster, "(min-width: 900px) 50vw, 100vw") +
@@ -320,20 +333,21 @@
         : '<div class="video"><video src="' + esc(v.src) + '" controls preload="metadata" playsinline poster="' + PHOTO_DIR + v.poster + '.jpg"></video></div>';
     }
     return '<article class="media-block"><h2 class="block-title">' + esc(t(phase)) + "</h2>" + media +
-      '<p class="caption">' + esc(t(phase === "opbouwen" ? "videoOp" : "videoAf")) + "</p></article>";
+      '<p class="caption">' + esc(t((phase === "opbouwen" ? "videoOp_" : "videoAf_") + state.setup)) + "</p></article>";
   }
 
   function viewVideos() {
-    return '<p class="lead">' + esc(t("videosLead")) + '</p><div class="video-grid">' + videoSlot("opbouwen") + videoSlot("afbouwen") + "</div>";
+    return '<p class="lead">' + esc(t("videosLead")) + "</p>" + setupPicker() +
+      '<div class="video-grid">' + videoSlot("opbouwen") + videoSlot("afbouwen") + "</div>";
   }
 
   function viewPhotos() {
     var index = 0;
-    return '<p class="lead">' + esc(t("photosLead")) + "</p>" + ROOM.photoGroups.map(function (g) {
+    return '<p class="lead">' + esc(t("photosLead")) + "</p>" + setupPicker() + currentSetup().photoGroups.map(function (g) {
       return '<section class="gallery-group"><h2 class="block-title">' + esc(L(g.title)) + '</h2><ul class="gallery">' +
         g.photos.map(function (p) {
           var i = index++;
-          return '<li><button type="button" class="gallery-item" data-photo="' + i + '">' +
+          return '<li><button type="button" class="gallery-item" data-photo="' + i + '" data-list="setup">' +
             img(p.id, "(min-width: 900px) 25vw, 50vw", L(p.caption)) + "</button>" +
             '<p class="gallery-caption">' + esc(L(p.caption)) + "</p></li>";
         }).join("") + "</ul></section>";
@@ -341,16 +355,14 @@
   }
 
   function viewPlan() {
-    var setups = ROOM.plan.setups;
-    var current = setups.filter(function (s) { return s.setup === state.setup; })[0] || setups[0];
+    var current = currentSetup();
     var hasStanding = current.items.some(function (it) { return it.type === "standing"; });
     var hasScreen = current.items.some(function (it) { return it.type === "screen"; });
     var cap = ROOM.capacity.filter(function (c) { return c.setup === current.setup; })[0];
-    var photo = PHOTOS[photoIndex(current.photo)];
-    return '<p class="lead">' + esc(t("planLead")) + "</p>" +
-      '<div class="seg" role="group" aria-label="' + esc(t("layout")) + '">' + setups.map(function (s) {
-        return '<button type="button" data-setup="' + s.setup + '" aria-pressed="' + (s.setup === current.setup) + '">' + esc(t("setup_" + s.setup)) + "</button>";
-      }).join("") + "</div>" +
+    var list = photosOf(current);
+    var coverIndex = photoIndex(list, current.cover);
+    var photo = list[coverIndex];
+    return '<p class="lead">' + esc(t("planLead")) + "</p>" + setupPicker() +
       '<div class="plan-layout"><div class="plan-main">' +
       '<div class="plan-wrap">' + PLANS.render(ROOM, current.setup, state.lang) + "</div>" +
       '<ul class="legend">' +
@@ -361,14 +373,12 @@
       '<li><span class="lg lg-door"></span>' + esc(t("legendDoor")) + "</li>" +
       '<li><span class="lg lg-exit"></span>' + esc(t("legendExit")) + "</li>" +
       '<li><span class="lg lg-glass"></span>' + esc(t("legendGlass")) + "</li>" +
-      '<li><span class="lg lg-mirror"></span>' + esc(t("legendMirror")) + "</li></ul>" +
-      '<p class="note">' + esc(t("planNote")) + "</p></div>" +
+      '<li><span class="lg lg-mirror"></span>' + esc(t("legendMirror")) + "</li></ul></div>" +
       '<aside class="plan-side"><h2 class="block-title">' + esc(t("planPhoto")) + "</h2>" +
-      '<button type="button" class="gallery-item" data-photo="' + photoIndex(current.photo) + '">' +
-      img(current.photo, "(min-width: 900px) 30vw, 100vw", L(photo.caption)) + "</button>" +
+      '<button type="button" class="gallery-item" data-photo="' + coverIndex + '" data-list="setup">' +
+      img(photo.id, "(min-width: 900px) 30vw, 100vw", L(photo.caption)) + "</button>" +
       '<p class="gallery-caption">' + esc(L(photo.caption)) + "</p>" +
-      (cap ? '<p class="plan-cap"><strong>' + esc(t("setup_" + cap.setup)) + "</strong> · " + esc(t("upTo", { n: cap.value })) +
-        ' <span class="source">(' + esc(t("source")) + ")</span></p>" : "") +
+      (cap ? '<p class="plan-cap"><strong>' + esc(t("setup_" + cap.setup)) + "</strong> · " + esc(t("upTo", { n: cap.value })) + "</p>" : "") +
       "</aside></div>";
   }
 
@@ -429,9 +439,9 @@
 
   // ---------- Fotoviewer / Photo viewer ----------
 
-  var viewer = { el: null, index: 0, returnFocus: null, touchX: null };
+  var viewer = { el: null, list: [], index: 0, returnFocus: null, touchX: null };
 
-  function openViewer(index) {
+  function openViewer(list, index) {
     if (!viewer.el) {
       viewer.el = document.createElement("div");
       viewer.el.className = "viewer";
@@ -440,6 +450,7 @@
       document.body.appendChild(viewer.el);
     }
     viewer.returnFocus = document.activeElement;
+    viewer.list = list;
     viewer.index = index;
     renderViewer();
     document.body.classList.add("no-scroll");
@@ -448,19 +459,19 @@
   }
 
   function renderViewer() {
-    var p = PHOTOS[viewer.index];
+    var p = viewer.list[viewer.index];
     viewer.el.setAttribute("aria-label", L(p.caption));
     viewer.el.innerHTML =
       '<button type="button" class="viewer-btn viewer-close" data-viewer="close" aria-label="' + esc(t("close")) + '">' + ICON.close + "</button>" +
       '<button type="button" class="viewer-btn viewer-prev" data-viewer="prev" aria-label="' + esc(t("prev")) + '">' + ICON.back + "</button>" +
       '<figure class="viewer-figure"><img src="' + PHOTO_DIR + p.id + '.jpg" alt="' + esc(L(p.caption)) + '">' +
       "<figcaption><span>" + esc(L(p.caption)) + '</span><span class="viewer-count">' +
-      esc(t("counter", { i: viewer.index + 1, n: PHOTOS.length })) + "</span></figcaption></figure>" +
+      esc(t("counter", { i: viewer.index + 1, n: viewer.list.length })) + "</span></figcaption></figure>" +
       '<button type="button" class="viewer-btn viewer-next" data-viewer="next" aria-label="' + esc(t("next")) + '">' + ICON.chevron + "</button>";
   }
 
   function stepViewer(dir) {
-    viewer.index = (viewer.index + dir + PHOTOS.length) % PHOTOS.length;
+    viewer.index = (viewer.index + dir + viewer.list.length) % viewer.list.length;
     var focused = document.activeElement && document.activeElement.getAttribute("data-viewer");
     renderViewer();
     viewer.el.querySelector('[data-viewer="' + (focused || "close") + '"]').focus();
@@ -497,6 +508,7 @@
 
   function render(keepScroll) {
     var r = parse();
+    if (r.setup) state.setup = r.setup;
     view.innerHTML = r.page === "home" ? viewHome() : r.page === "qr" ? viewQr() : viewSection(r.page);
     view.className = "view page-" + r.page;
     renderChrome(r);
@@ -526,7 +538,7 @@
       return;
     }
     if (el.hasAttribute("data-set-lang")) return setLang(el.getAttribute("data-set-lang"));
-    if (el.hasAttribute("data-photo")) return openViewer(Number(el.getAttribute("data-photo")));
+    if (el.hasAttribute("data-photo")) return openViewer(photoList(el.getAttribute("data-list")), Number(el.getAttribute("data-photo")));
 
     if (el.hasAttribute("data-viewer")) {
       var v = el.getAttribute("data-viewer");
@@ -536,6 +548,7 @@
 
     if (el.hasAttribute("data-setup")) {
       state.setup = el.getAttribute("data-setup");
+      history.replaceState(null, "", "#/" + parse().page + "/" + state.setup);
       return render(true);
     }
 

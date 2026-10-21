@@ -237,12 +237,6 @@ button {
   font-size: 1.1rem;
 }
 
-.source {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -279,15 +273,6 @@ button {
 
 .btn-light:hover {
   background: #fff;
-}
-
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  color: var(--terra-dark);
-  font-weight: 600;
 }
 
 /* Foto's vullen hun vak / Photos fill their box */
@@ -544,31 +529,6 @@ button {
   font-size: 3.4rem;
   line-height: 0.95;
   text-align: center;
-}
-
-.about {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.about-logo {
-  flex: none;
-  width: 72px;
-  height: auto;
-}
-
-.about p {
-  color: var(--slate-2);
-}
-
-.card-title {
-  margin-bottom: 6px;
-  font-family: var(--font-head);
-  font-weight: 500;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
 }
 
 /* ---------- Onderdelen / Sections ---------- */
@@ -829,23 +789,12 @@ button {
   background: #C9A54C;
 }
 
-.note {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 0.92rem;
-  font-style: italic;
-}
-
 .plan-side {
   margin-top: 28px;
 }
 
 .plan-cap {
   margin-top: 14px;
-}
-
-.plan-cap .source {
-  display: inline;
 }
 
 .soon {

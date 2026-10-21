@@ -30,7 +30,7 @@ cameragegevens). Een foto toevoegen:
 
 1. Maak een grote (1600 px breed) en een kleine versie (720 px breed): `4300.jpg` en `4300-sm.jpg`.
 2. Zet ze in `assets/hooiberg/`.
-3. Voeg in `js/data.js` bij `photoGroups` een regel toe:
+3. Voeg in `js/data.js`, bij de juiste opstelling (`diner` of `borrel`), onder `photoGroups` een regel toe:
 
 ```js
 { id: "4300", caption: ["Korte uitleg onder de foto", "Short caption below the photo"] },
@@ -38,25 +38,33 @@ cameragegevens). Een foto toevoegen:
 
 ## Video's
 
-Zet in `js/data.js` het pad of een YouTube-link bij `src`. Zolang `src` leeg (`null`) is, staat er
-"Video volgt" over een foto.
+Elke opstelling heeft een video voor opbouwen en afbouwen. Zet in `js/data.js` bij de opstelling
+het pad of een YouTube-link bij `src`. Zolang `src` leeg (`null`) is, staat er "Video volgt" over
+een foto.
 
 ```js
 videos: {
-  opbouwen: { src: "assets/videos/hooiberg-opbouwen.mp4", poster: "4268" },
-  afbouwen: { src: "https://youtu.be/XXXXXXXX", poster: "4279" }
+  opbouwen: { src: "assets/videos/hooiberg-diner-opbouwen.mp4", poster: "4268" },
+  afbouwen: { src: "https://youtu.be/XXXXXXXX", poster: "4232" }
 },
 ```
 
+## Opstellingen / Layouts
+
+Bij Video's, Foto's en Plattegrond kies je Diner of Borrel. De keuze staat ook in het adres,
+zodat je direct kunt linken: `#/fotos/borrel`, `#/plattegrond/diner`.
+
 ## Plattegrond / Floor plan
 
-Getekend op basis van de foto's; maten en plekken zijn bij benadering. Wanden, deuren, glas en
-spiegels staan in `plan` in `js/data.js`, net als de meubels per opstelling (`x`/`y` in meters).
+Getekend op basis van de foto's, zoals je binnenkomt: de brasserie onderaan, het park bovenaan.
+Maten en plekken zijn bij benadering. Wanden, deuren, glas en spiegels staan in `plan` in
+`js/data.js`; de meubels staan per opstelling bij `items` (`x`/`y` in meters).
 
 ## QR-code
 
-Op de startpagina onderaan: **QR-code voor de presentatie**. De code opent de startpagina van het
-handboek en wijst automatisch naar het adres waarop de site draait.
+Ga naar `#/qr` (https://finn-inholland.github.io/brasserie-park-handbook/#/qr) en druk op
+**Printen**. De code opent de startpagina van het handboek en wijst automatisch naar het adres
+waarop de site draait.
 
 ## Huisstijl / Brand
 
