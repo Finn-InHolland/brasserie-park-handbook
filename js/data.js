@@ -7,6 +7,27 @@
 (function () {
   "use strict";
 
+  // Tafel voor vier bij het raam: lange kant langs de wand, 2 stoelen aan de raamkant en 2 aan de zaalkant
+  // Table for four by the window: long side along the wall, 2 chairs on the window side and 2 on the room side
+  function windowTable(x, y, rot) {
+    return { type: "table", x: x, y: y, w: 1.2, h: 0.7, rot: rot || 0, chairs: { top: 2, bottom: 2 } };
+  }
+
+  // Houten tafel (dezelfde tafels als de lange dinertafel), met 2 stoelen aan elke lange kant
+  // Wooden table (the same tables as the long dinner table), with 2 chairs on each long side
+  function woodenTable(x, y) {
+    return { type: "table", x: x, y: y, w: 1.6, h: 0.8, chairs: { top: 2, bottom: 2 } };
+  }
+
+  // Deze vier tafels staan bij Borrel en Losse tafels op dezelfde plek
+  // These four tables stand in the same place for Drinks and Separate tables
+  var WINDOW_TABLES = [
+    windowTable(1.9, 2.45, -63.4),
+    windowTable(2.7, 1.1),
+    windowTable(5.3, 1.1),
+    windowTable(6.1, 2.45, 63.4)
+  ];
+
   window.BP_DATA = {
     room: {
       id: "hooiberg",
@@ -38,7 +59,7 @@
       setups: [
         {
           setup: "diner",
-          cover: "4268",
+          cover: "4261",
           videos: {
             opbouwen: { src: null, poster: "4268" },
             afbouwen: { src: null, poster: "4232" }
@@ -48,6 +69,7 @@
               title: ["De opstelling", "The layout"],
               photos: [
                 { id: "4268", caption: ["De lange tafel, richting de deuren naar de brasserie", "The long table, facing the doors to the brasserie"] },
+                { id: "4261", caption: ["Overzicht: lange tafel, scherm en bijzettafel", "Overview: long table, screen and side table"] },
                 { id: "4232", caption: ["De tafel is twee tafels breed, met stoelen aan beide kanten", "The table is two tables wide, with chairs on both sides"] },
                 { id: "4231", caption: ["Aan het eind van de tafel staat het scherm, voor de ramen", "The screen stands at the end of the table, in front of the windows"] },
                 { id: "4244", caption: ["Richting het park: scherm, glazen deuren en een bijzettafel", "Towards the park: screen, glass doors and a side table"] },
@@ -67,17 +89,18 @@
             }
           ],
           items: [
-            { type: "table", x: 4, y: 3.95, w: 1.6, h: 5.4, chairs: { left: 9, right: 9, top: 1, bottom: 2 } },
+            { type: "table", x: 4, y: 3.7, w: 1.6, h: 4.9, chairs: { left: 8, right: 8, top: 1, bottom: 2 } },
             { type: "screen", x: 4, y: 0.5, w: 1.4, label: ["Scherm", "Screen"] },
-            { type: "table", x: 7.15, y: 4, w: 0.7, h: 1.4, side: true }
+            { type: "table", x: 7.15, y: 4, w: 0.7, h: 1.4, side: true, chairs: { left: 2 } },
+            { type: "chair", x: 2.1, y: 0.8, rot: -63.4 }
           ]
         },
         {
           setup: "borrel",
-          cover: "4297",
+          cover: "4299",
           videos: {
             opbouwen: { src: null, poster: "4297" },
-            afbouwen: { src: null, poster: "4279" }
+            afbouwen: { src: null, poster: "4299" }
           },
           photoGroups: [
             {
@@ -85,31 +108,54 @@
               photos: [
                 { id: "4297", caption: ["Statafels in het midden, tafels voor vier langs de ramen", "High tables in the middle, tables for four along the windows"] },
                 { id: "4299", caption: ["Gezien vanuit de deuren van de brasserie", "Seen from the brasserie doors"] },
-                { id: "4279", caption: ["Open vloer in het midden van de zaal", "Open floor in the middle of the room"] },
-                { id: "4282", caption: ["Tafels voor vier bij de glazen deuren", "Tables for four by the glass doors"] },
+                { id: "4289", caption: ["Statafels bij de ramen en een houten tafel aan de zijkant", "High tables by the windows and a wooden table at the side"] },
                 { id: "4287", caption: ["Statafels met een zwarte hoes", "High tables with a black cover"] },
-                { id: "4295", caption: ["Houten tafel aan de binnenkant van de zaal", "Wooden table on the inner side of the room"] }
+                { id: "4295", caption: ["Houten tafel bij de glazen deur aan de binnenplaats", "Wooden table by the glass door to the courtyard"] }
               ]
             },
             {
               title: ["Details", "Details"],
               photos: [
-                { id: "4291", caption: ["Statafel van bovenaf, met kaars", "High table from above, with a candle"] },
+                { id: "4291", caption: ["Statafel van bovenaf, met kaars", "High table from above, with a candle"] }
+              ]
+            }
+          ],
+          items: WINDOW_TABLES.concat([
+            { type: "standing", x: 4, y: 3.4 },
+            { type: "standing", x: 1.2, y: 3.75 },
+            { type: "standing", x: 6.8, y: 3.75 },
+            woodenTable(2.3, 6.3),
+            woodenTable(5.7, 6.3)
+          ])
+        },
+        {
+          setup: "losse-tafels",
+          cover: "4279",
+          videos: {
+            opbouwen: { src: null, poster: "4282" },
+            afbouwen: { src: null, poster: "4279" }
+          },
+          photoGroups: [
+            {
+              title: ["De opstelling", "The layout"],
+              photos: [
+                { id: "4279", caption: ["Tafels voor vier bij de ramen, houten tafels aan de zijkant", "Tables for four by the windows, wooden tables at the side"] },
+                { id: "4282", caption: ["Tafels voor vier bij de glazen deuren", "Tables for four by the glass doors"] }
+              ]
+            },
+            {
+              title: ["Details", "Details"],
+              photos: [
                 { id: "4285", caption: ["Houten tafel van bovenaf", "Wooden table from above"] }
               ]
             }
           ],
-          items: [
-            { type: "table", x: 6.25, y: 2.65, w: 0.8, h: 0.8, rot: 63.4, chairs: { left: 1, right: 1, top: 1, bottom: 1 } },
-            { type: "table", x: 5.25, y: 1.05, w: 0.8, h: 0.8, chairs: { left: 1, right: 1, top: 1, bottom: 1 } },
-            { type: "table", x: 2.75, y: 1.05, w: 0.8, h: 0.8, chairs: { left: 1, right: 1, top: 1, bottom: 1 } },
-            { type: "table", x: 1.75, y: 2.65, w: 0.8, h: 0.8, rot: -63.4, chairs: { left: 1, right: 1, top: 1, bottom: 1 } },
-            { type: "standing", x: 4, y: 3.0 },
-            { type: "standing", x: 6.45, y: 4.05 },
-            { type: "standing", x: 1.55, y: 4.05 },
-            { type: "table", x: 5.25, y: 6.15, w: 1.4, h: 0.8, chairs: { top: 2, bottom: 2 } },
-            { type: "table", x: 2.75, y: 6.15, w: 1.4, h: 0.8, chairs: { top: 2, bottom: 2 } }
-          ]
+          items: WINDOW_TABLES.concat([
+            woodenTable(1.6, 4.25),
+            woodenTable(2.3, 6.3),
+            woodenTable(6.4, 4.25),
+            woodenTable(5.7, 6.3)
+          ])
         }
       ],
 

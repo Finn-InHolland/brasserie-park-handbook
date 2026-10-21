@@ -30,7 +30,7 @@ cameragegevens). Een foto toevoegen:
 
 1. Maak een grote (1600 px breed) en een kleine versie (720 px breed): `4300.jpg` en `4300-sm.jpg`.
 2. Zet ze in `assets/hooiberg/`.
-3. Voeg in `js/data.js`, bij de juiste opstelling (`diner` of `borrel`), onder `photoGroups` een regel toe:
+3. Voeg in `js/data.js`, bij de juiste opstelling (`diner`, `borrel` of `losse-tafels`), onder `photoGroups` een regel toe:
 
 ```js
 { id: "4300", caption: ["Korte uitleg onder de foto", "Short caption below the photo"] },
@@ -51,8 +51,8 @@ videos: {
 
 ## Opstellingen / Layouts
 
-Bij Video's, Foto's en Plattegrond kies je Diner of Borrel. De keuze staat ook in het adres,
-zodat je direct kunt linken: `#/fotos/borrel`, `#/plattegrond/diner`.
+Bij Video's, Foto's en Plattegrond kies je Diner, Borrel of Losse tafels. De keuze staat ook in het adres,
+zodat je direct kunt linken: `#/fotos/borrel`, `#/plattegrond/losse-tafels`.
 
 ## Plattegrond / Floor plan
 

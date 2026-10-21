@@ -141,6 +141,9 @@
 
   function drawItem(it, lang) {
     if (it.type === "table") return drawTable(it);
+    if (it.type === "chair") {
+      return '<g transform="translate(' + r2(it.x) + " " + r2(it.y) + ") rotate(" + (it.rot || 0) + ')">' + chair(0, 0) + "</g>";
+    }
     if (it.type === "standing") {
       return '<circle cx="' + r2(it.x) + '" cy="' + r2(it.y) + '" r="0.36" fill="' + C.standing + '"/>' +
         '<circle cx="' + r2(it.x) + '" cy="' + r2(it.y) + '" r="0.22" fill="none" stroke="#5A625F" stroke-width="0.03"/>';

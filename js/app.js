@@ -38,7 +38,7 @@
       tabInfo: "Uitleg",
       subVideos: "Opbouwen en afbouwen in beeld",
       subPhotos: "Zo hoort de zaal eruit te zien",
-      subPlan: "Diner en borrel van bovenaf",
+      subPlan: "Elke opstelling van bovenaf",
       comingSoon: "Coming soon",
       opbouwen: "Opbouwen",
       afbouwen: "Afbouwen",
@@ -47,6 +47,8 @@
       videoAf_diner: "Na het diner: zo ruim je de Hooiberg netjes op.",
       videoOp_borrel: "Stap voor stap: zo zet je de Hooiberg klaar voor een borrel.",
       videoAf_borrel: "Na de borrel: zo ruim je de Hooiberg netjes op.",
+      "videoOp_losse-tafels": "Stap voor stap: zo zet je de losse tafels in de Hooiberg klaar.",
+      "videoAf_losse-tafels": "Na afloop: zo ruim je de Hooiberg netjes op.",
       videoSoon: "Video volgt",
       photosLead: "Kies de opstelling. Zo hoort de zaal eruit te zien; tik op een foto om hem groot te bekijken.",
       planLead: "Kies de opstelling. Zo zet je de tafels en stoelen neer.",
@@ -77,7 +79,8 @@
       counter: "{i} van {n}",
       setup_diner: "Diner",
       setup_borrel: "Borrel",
-      setup_vergadering: "Vergadering"
+      setup_vergadering: "Vergadering",
+      "setup_losse-tafels": "Losse tafels"
     },
     en: {
       appTitle: "Brasserie Park Handbook",
@@ -100,7 +103,7 @@
       tabInfo: "Info",
       subVideos: "Setup and teardown on video",
       subPhotos: "How the room should look",
-      subPlan: "Dinner and drinks from above",
+      subPlan: "Every layout from above",
       comingSoon: "Coming soon",
       opbouwen: "Setup",
       afbouwen: "Teardown",
@@ -109,6 +112,8 @@
       videoAf_diner: "After the dinner: how to clear the Hooiberg properly.",
       videoOp_borrel: "Step by step: how to set up the Hooiberg for drinks.",
       videoAf_borrel: "After the drinks: how to clear the Hooiberg properly.",
+      "videoOp_losse-tafels": "Step by step: how to set out the separate tables in the Hooiberg.",
+      "videoAf_losse-tafels": "Afterwards: how to clear the Hooiberg properly.",
       videoSoon: "Video coming soon",
       photosLead: "Choose the layout. This is how the room should look; tap a photo to see it full size.",
       planLead: "Choose the layout. This is where the tables and chairs go.",
@@ -139,7 +144,8 @@
       counter: "{i} of {n}",
       setup_diner: "Dinner",
       setup_borrel: "Drinks",
-      setup_vergadering: "Meeting"
+      setup_vergadering: "Meeting",
+      "setup_losse-tafels": "Separate tables"
     }
   };
 
