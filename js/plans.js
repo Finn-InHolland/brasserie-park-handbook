@@ -117,26 +117,39 @@
     return '<rect x="' + r2(x - 0.2) + '" y="' + r2(y - 0.2) + '" width="0.4" height="0.4" rx="0.1" fill="' + C.chair + '"/>';
   }
 
-  // Stoelen gelijk verdeeld langs een zijde / Chairs spread evenly along a side
-  function chairsAlong(n, length, place) {
-    var out = [];
-    for (var k = 0; k < n; k++) out.push(place(-length / 2 + (length * (k + 0.5)) / n));
-    return out;
+  // Stoelen rond een tafel als losse stoelen, in meters op de plattegrond. `chairs` telt per zijde.
+  // Gebruikt door de editor om tafels uit oudere versies (met stoelen eraan vast) om te zetten.
+  // Chairs around a table as separate chairs, in plan metres. `chairs` counts per side.
+  // Used by the editor to convert tables from older versions (with chairs attached).
+  function tableChairs(table, chairs) {
+    var hw = table.w / 2, hh = table.h / 2, gap = 0.32;
+    var a = (table.rot || 0) * Math.PI / 180, cos = Math.cos(a), sin = Math.sin(a);
+    var local = [];
+    function along(n, length, place) {
+      for (var k = 0; k < n; k++) local.push(place(-length / 2 + (length * (k + 0.5)) / n));
+    }
+    along(chairs.left || 0, table.h, function (v) { return [-hw - gap, v]; });
+    along(chairs.right || 0, table.h, function (v) { return [hw + gap, v]; });
+    along(chairs.top || 0, table.w, function (v) { return [v, -hh - gap]; });
+    along(chairs.bottom || 0, table.w, function (v) { return [v, hh + gap]; });
+    return local.map(function (p) {
+      var c = { type: "chair", x: r2c(table.x + p[0] * cos - p[1] * sin), y: r2c(table.y + p[0] * sin + p[1] * cos) };
+      if (table.rot) c.rot = table.rot;
+      return c;
+    });
+  }
+
+  function r2c(n) {
+    return Math.round(n * 100) / 100;
   }
 
   function drawTable(it) {
-    var out = [];
-    var c = it.chairs || {};
-    var hw = it.w / 2, hh = it.h / 2, gap = 0.32;
-    out = out.concat(chairsAlong(c.left || 0, it.h, function (v) { return chair(-hw - gap, v); }));
-    out = out.concat(chairsAlong(c.right || 0, it.h, function (v) { return chair(hw + gap, v); }));
-    out = out.concat(chairsAlong(c.top || 0, it.w, function (v) { return chair(v, -hh - gap); }));
-    out = out.concat(chairsAlong(c.bottom || 0, it.w, function (v) { return chair(v, hh + gap); }));
-    // Bijzettafel: lichter en gestippeld, zonder stoelen / Side table: lighter and dashed, without chairs
-    out.push('<rect x="' + r2(-hw) + '" y="' + r2(-hh) + '" width="' + r2(it.w) + '" height="' + r2(it.h) +
+    var hw = it.w / 2, hh = it.h / 2;
+    // Bijzettafel: lichter en gestippeld / Side table: lighter and dashed
+    return '<g transform="translate(' + r2(it.x) + " " + r2(it.y) + ") rotate(" + (it.rot || 0) + ')">' +
+      '<rect x="' + r2(-hw) + '" y="' + r2(-hh) + '" width="' + r2(it.w) + '" height="' + r2(it.h) +
       '" rx="0.05" fill="' + (it.side ? C.side : C.wood) + '" stroke="' + C.woodEdge + '" stroke-width="0.04"' +
-      (it.side ? ' stroke-dasharray="0.1 0.07"' : "") + "/>");
-    return '<g transform="translate(' + r2(it.x) + " " + r2(it.y) + ") rotate(" + (it.rot || 0) + ')">' + out.join("") + "</g>";
+      (it.side ? ' stroke-dasharray="0.1 0.07"' : "") + "/></g>";
   }
 
   function drawItem(it, lang) {
@@ -189,5 +202,5 @@
       esc(room.name) + '">' + out.join("") + "</svg>";
   }
 
-  window.BP_PLANS = { render: render };
+  window.BP_PLANS = { render: render, tableChairs: tableChairs };
 })();

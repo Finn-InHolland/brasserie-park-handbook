@@ -64,10 +64,11 @@ Maten en plekken zijn bij benadering. Wanden, deuren en glas staan in `plan` in
 
 Open https://finn-inholland.github.io/brasserie-park-handbook/#/editor (staat niet in het menu).
 
-- Tik op een meubel en sleep het naar de goede plek.
-- Draaien in stappen van 5°, verschuiven, stoelen per kant, maat, dupliceren en verwijderen.
-- Toevoegen: tafel voor 4, houten tafel, statafel, stoel, bijzettafel, scherm.
-- Toetsen: pijltjes (Shift = verder), R / Shift+R, Delete, Ctrl+D, Ctrl+Z.
+- Tik op een meubel en sleep het naar de goede plek. Tafels en stoelen zijn losse meubels.
+- Meerdere kiezen: houd **Shift** ingedrukt en klik. Selectievak: houd de **rechtermuisknop** ingedrukt en sleep.
+- Draaien in stappen van 5° (een groep draait om zijn midden), verschuiven, maat van een tafel, dupliceren en verwijderen.
+- Toevoegen: tafel voor 4 en houten tafel (met 4 losse stoelen), statafel, stoel, bijzettafel, scherm.
+- Toetsen: pijltjes (Shift = verder), R / Shift+R, Delete, Ctrl+D, Ctrl+A, Ctrl+Z, Esc.
 
 Wijzigingen blijven op je eigen apparaat tot je ze op de site zet:
 

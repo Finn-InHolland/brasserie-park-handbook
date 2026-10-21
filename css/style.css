@@ -927,6 +927,14 @@ button {
   pointer-events: none;
 }
 
+.ed-box {
+  fill: rgba(196, 120, 82, 0.1);
+  stroke: var(--terra);
+  stroke-width: 0.04;
+  stroke-dasharray: 0.12 0.08;
+  pointer-events: none;
+}
+
 .ed-panel {
   margin-top: 16px;
   padding: 16px;
