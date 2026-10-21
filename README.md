@@ -57,7 +57,7 @@ zodat je direct kunt linken: `#/fotos/borrel`, `#/plattegrond/losse-tafels`.
 ## Plattegrond / Floor plan
 
 Getekend op basis van de foto's, zoals je binnenkomt: de brasserie onderaan, het park bovenaan.
-Maten en plekken zijn bij benadering. Wanden, deuren, glas en spiegels staan in `plan` in
+Maten en plekken zijn bij benadering. Wanden, deuren en glas staan in `plan` in
 `js/data.js`; de meubels staan per opstelling bij `items` (`x`/`y` in meters).
 
 ## QR-code
