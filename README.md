@@ -1,61 +1,62 @@
-# Brasserie Park Handboek / Handbook
+# Brasserie Park Handboek: prototype Hooiberg
 
-Mockup van een web-app voor de medewerkers van Brasserie Park: per zaal uitleg-video's, foto's,
-plattegronden, een check-list van A tot Z en korte uitleg, plus QR-codes om op te hangen.
-Gemaakt als schoolproject. Vooral voor de telefoon, maar werkt ook op de pc. Nederlands en Engels.
+Prototype van een web-app voor de medewerkers van Brasserie Park, voor het klaarzetten en afbouwen
+van de zalen. Voor nu alleen de **Hooiberg**: video's, foto's en een plattegrond die is getekend op
+basis van de foto's. Check-list en uitleg staan op "Coming soon". Gemaakt als schoolproject.
+Vooral voor de telefoon, werkt ook op de pc. Nederlands en Engels.
 
-A mockup web app for Brasserie Park staff: per room, how-to videos, photos, floor plans, an A–Z
-checklist and short tips, plus printable QR codes. Made as a school project. Phone-first, also works
-on PC. Dutch and English.
+A prototype web app for Brasserie Park staff, for setting up and clearing the rooms. For now only the
+**Hooiberg**: videos, photos and a floor plan drawn from the photos. Checklist and info are "Coming
+soon". Made as a school project. Phone-first, also works on PC. Dutch and English.
 
 Live: https://finn-inholland.github.io/brasserie-park-handbook/
 
 ## Structuur / Structure
 
 ```
-index.html                    De pagina / The page shell
-css/style.css                 Huisstijl en opmaak / Brand styling
-js/data.js                    ALLE INHOUD: zalen, check-lists, tips, foto's, video's / ALL CONTENT
-js/plans.js                   Tekent de plattegronden op schaal / Draws the floor plans to scale
-js/app.js                     Pagina's, taal, check-lists, QR-codes / Pages, language, checklists, QR codes
+index.html                      De pagina / The page shell
+css/style.css                   Huisstijl en opmaak / Brand styling
+js/data.js                      ALLE INHOUD van de Hooiberg / ALL Hooiberg content
+js/plans.js                     Tekent de plattegrond / Draws the floor plan
+js/app.js                       Pagina's, taal, fotoviewer, QR-code / Pages, language, photo viewer, QR code
 assets/logo-brasserie-park.svg  Logo van brasseriepark.nl
+assets/hooiberg/                Foto's: <nummer>.jpg (1600 px) en <nummer>-sm.jpg (720 px)
 ```
 
-## Foto's en video's toevoegen / Adding photos and videos
+## Foto's / Photos
 
-1. Zet het bestand in de map `assets/`, bijvoorbeeld `assets/fotos/tuinzaal-overzicht.jpg`.
-2. Open `js/data.js`, zoek de zaal en vul `src` in:
+De foto's in `assets/hooiberg/` zijn verkleinde kopieën van de aangeleverde foto's (zonder
+cameragegevens). Een foto toevoegen:
+
+1. Maak een grote (1600 px breed) en een kleine versie (720 px breed): `4300.jpg` en `4300-sm.jpg`.
+2. Zet ze in `assets/hooiberg/`.
+3. Voeg in `js/data.js` bij `photoGroups` een regel toe:
 
 ```js
-photos: [
-  { src: "assets/fotos/tuinzaal-overzicht.jpg", caption: ["Overzicht van de Tuinzaal", "Overview of the Tuinzaal"] },
+{ id: "4300", caption: ["Korte uitleg onder de foto", "Short caption below the photo"] },
 ```
 
-Video's werken hetzelfde. Een eigen bestand (`.mp4`) of een YouTube-link mag allebei:
+## Video's
+
+Zet in `js/data.js` het pad of een YouTube-link bij `src`. Zolang `src` leeg (`null`) is, staat er
+"Video volgt" over een foto.
 
 ```js
-videos: { opbouwen: "assets/videos/tuinzaal-opbouwen.mp4", afbouwen: "https://youtu.be/XXXXXXXX" },
+videos: {
+  opbouwen: { src: "assets/videos/hooiberg-opbouwen.mp4", poster: "4268" },
+  afbouwen: { src: "https://youtu.be/XXXXXXXX", poster: "4279" }
+},
 ```
 
-Zolang `src` leeg (`null`) is, toont de app een nette "Foto volgt" / "Video volgt"-plek.
-Houd foto's onder ~500 KB (bijv. 1600 px breed) zodat de app snel blijft op de telefoon.
+## Plattegrond / Floor plan
 
-## Teksten aanpassen / Editing text
+Getekend op basis van de foto's; maten en plekken zijn bij benadering. Wanden, deuren, glas en
+spiegels staan in `plan` in `js/data.js`, net als de meubels per opstelling (`x`/`y` in meters).
 
-Elke tekst in `js/data.js` is een paar: `["Nederlands", "English"]`.
-Check-list punten, tips en "belangrijk om te weten" staan per zaal. De algemene punten die voor
-elke zaal gelden staan bovenaan het bestand.
+## QR-code
 
-## Plattegronden / Floor plans
-
-De plattegronden worden getekend uit de afmetingen en capaciteit van brasseriepark.nl/zalen (2026).
-De plek van deuren, de bar en andere vaste meubels is een schatting: pas die aan in `plan` per zaal
-in `js/data.js` zodra de echte plattegronden er zijn.
-
-## QR-codes
-
-Via **Meer → QR-codes bekijken en printen**. Elke code opent direct de juiste zaal. De codes wijzen
-automatisch naar het adres waarop de site draait.
+Op de startpagina onderaan: **QR-code voor de presentatie**. De code opent de startpagina van het
+handboek en wijst automatisch naar het adres waarop de site draait.
 
 ## Huisstijl / Brand
 
