@@ -773,8 +773,7 @@ button {
 
 .lg-door,
 .lg-exit,
-.lg-glass,
-.lg-mirror {
+.lg-glass {
   height: 5px;
   border-radius: 3px;
 }
@@ -789,10 +788,6 @@ button {
 
 .lg-glass {
   background: #A9C6D3;
-}
-
-.lg-mirror {
-  background: #C9A54C;
 }
 
 .plan-side {

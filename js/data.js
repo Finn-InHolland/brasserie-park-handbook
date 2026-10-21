@@ -69,7 +69,6 @@
           items: [
             { type: "table", x: 4, y: 3.95, w: 1.6, h: 5.4, chairs: { left: 9, right: 9, top: 1, bottom: 2 } },
             { type: "screen", x: 4, y: 0.5, w: 1.4, label: ["Scherm", "Screen"] },
-            { type: "table", x: 0.85, y: 4, w: 0.7, h: 1.4, side: true },
             { type: "table", x: 7.15, y: 4, w: 0.7, h: 1.4, side: true }
           ]
         },
@@ -127,19 +126,19 @@
         parkWall: 3,
         walls: [
           { glass: [] },
-          { glass: [[0.5, 0.94]], mirror: [0.1, 0.32] },
+          { glass: [[0.5, 0.94]] },
           { glass: [[0.04, 0.96]] },
           { glass: [[0.04, 0.96]] },
           { glass: [[0.04, 0.96]] },
-          { glass: [[0.06, 0.5]], mirror: [0.68, 0.9] }
+          { glass: [[0.06, 0.5]] }
         ],
         // `at` is de plek op de wand (0 = begin, 1 = eind) / `at` is the spot along the wall (0 = start, 1 = end)
         doors: [
           { wall: 0, at: 0.5, width: 1.6, swing: true, label: ["Brasserie", "Brasserie"] },
           { wall: 1, at: 0.72, width: 0.9, label: ["Zijdeur", "Side door"] },
-          { wall: 2, at: 0.18, width: 0.9, label: ["Terras", "Terrace"] },
+          { wall: 2, at: 0.53, width: 1.4, label: ["Terras", "Terrace"] },
           { wall: 3, at: 0.5, width: 1.4, exit: true, label: ["Nooduitgang", "Emergency exit"] },
-          { wall: 4, at: 0.82, width: 0.9, label: ["Terras", "Terrace"] },
+          { wall: 4, at: 0.47, width: 1.4, label: ["Terras", "Terrace"] },
           { wall: 5, at: 0.28, width: 0.9, label: ["Binnenplaats", "Courtyard"] }
         ]
       }

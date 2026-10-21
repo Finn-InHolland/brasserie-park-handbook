@@ -9,7 +9,6 @@
     wall: "#3E4A47",
     floor: "#F4EEE3",
     glass: "#A9C6D3",
-    mirror: "#C9A54C",
     wood: "#B98550",
     woodEdge: "#7A532C",
     side: "#E2CBA8",
@@ -76,9 +75,6 @@
         out.push(line(at(w, g[0]), at(w, g[1]), C.glass, 0.16));
         out.push(line(at(w, g[0]), at(w, g[1]), C.wall, 0.025));
       });
-      if (spec.mirror) {
-        out.push(line(at(w, spec.mirror[0], 0.14), at(w, spec.mirror[1], 0.14), C.mirror, 0.09, ' stroke-linecap="round"'));
-      }
     });
     return out;
   }

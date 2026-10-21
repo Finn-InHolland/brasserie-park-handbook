@@ -60,7 +60,6 @@
       legendDoor: "Deur",
       legendExit: "Nooduitgang",
       legendGlass: "Glazen wand",
-      legendMirror: "Spiegel",
       checklistSoon: "De check-list voor de Hooiberg wordt binnenkort toegevoegd.",
       infoSoon: "De uitleg voor de Hooiberg wordt binnenkort toegevoegd.",
       backHome: "Terug naar start",
@@ -123,7 +122,6 @@
       legendDoor: "Door",
       legendExit: "Emergency exit",
       legendGlass: "Glass wall",
-      legendMirror: "Mirror",
       checklistSoon: "The checklist for the Hooiberg will be added soon.",
       infoSoon: "The info for the Hooiberg will be added soon.",
       backHome: "Back to start",
@@ -376,8 +374,7 @@
       (hasScreen ? '<li><span class="lg lg-screen"></span>' + esc(t("legendScreen")) + "</li>" : "") +
       '<li><span class="lg lg-door"></span>' + esc(t("legendDoor")) + "</li>" +
       '<li><span class="lg lg-exit"></span>' + esc(t("legendExit")) + "</li>" +
-      '<li><span class="lg lg-glass"></span>' + esc(t("legendGlass")) + "</li>" +
-      '<li><span class="lg lg-mirror"></span>' + esc(t("legendMirror")) + "</li></ul></div>" +
+      '<li><span class="lg lg-glass"></span>' + esc(t("legendGlass")) + "</li></ul></div>" +
       '<aside class="plan-side"><h2 class="block-title">' + esc(t("planPhoto")) + "</h2>" +
       '<button type="button" class="gallery-item" data-photo="' + coverIndex + '" data-list="setup">' +
       img(photo.id, "(min-width: 900px) 30vw, 100vw", L(photo.caption)) + "</button>" +
