@@ -69,8 +69,8 @@
           items: [
             { type: "table", x: 4, y: 3.95, w: 1.6, h: 5.4, chairs: { left: 9, right: 9, top: 1, bottom: 2 } },
             { type: "screen", x: 4, y: 0.5, w: 1.4, label: ["Scherm", "Screen"] },
-            { type: "table", x: 6.15, y: 2.6, w: 1.2, h: 0.6, side: true },
-            { type: "table", x: 6.15, y: 5.4, w: 1.2, h: 0.6, side: true }
+            { type: "table", x: 0.85, y: 4, w: 0.7, h: 1.4, side: true },
+            { type: "table", x: 7.15, y: 4, w: 0.7, h: 1.4, side: true }
           ]
         },
         {
