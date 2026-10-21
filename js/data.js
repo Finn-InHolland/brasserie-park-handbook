@@ -50,7 +50,7 @@
                 { id: "4268", caption: ["De lange tafel, richting de deuren naar de brasserie", "The long table, facing the doors to the brasserie"] },
                 { id: "4232", caption: ["De tafel is twee tafels breed, met stoelen aan beide kanten", "The table is two tables wide, with chairs on both sides"] },
                 { id: "4231", caption: ["Aan het eind van de tafel staat het scherm, voor de ramen", "The screen stands at the end of the table, in front of the windows"] },
-                { id: "4244", caption: ["Richting het park: scherm, glazen deuren en een losse tafel voor vier", "Towards the park: screen, glass doors and a separate table for four"] },
+                { id: "4244", caption: ["Richting het park: scherm, glazen deuren en een bijzettafel", "Towards the park: screen, glass doors and a side table"] },
                 { id: "4248", caption: ["Overzicht vanaf de parkkant", "Overview from the park side"] },
                 { id: "4236", caption: ["Wand met spiegel en lijstjes naast de witte deuren", "Wall with a mirror and frames next to the white doors"] },
                 { id: "4273", caption: ["De glazen gevel aan de parkkant", "The glass front on the park side"] },
@@ -69,8 +69,8 @@
           items: [
             { type: "table", x: 4, y: 3.95, w: 1.6, h: 5.4, chairs: { left: 9, right: 9, top: 1, bottom: 2 } },
             { type: "screen", x: 4, y: 0.5, w: 1.4, label: ["Scherm", "Screen"] },
-            { type: "table", x: 6.35, y: 3.1, w: 0.8, h: 0.8, rot: 63.4, chairs: { left: 1, right: 1, top: 1, bottom: 1 } },
-            { type: "table", x: 6.25, y: 5.25, w: 0.8, h: 0.8, rot: -63.4, chairs: { left: 1, right: 1, top: 1, bottom: 1 } }
+            { type: "table", x: 6.15, y: 2.6, w: 1.2, h: 0.6, side: true },
+            { type: "table", x: 6.15, y: 5.4, w: 1.2, h: 0.6, side: true }
           ]
         },
         {

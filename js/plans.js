@@ -12,6 +12,7 @@
     mirror: "#C9A54C",
     wood: "#B98550",
     woodEdge: "#7A532C",
+    side: "#E2CBA8",
     chair: "#2F3634",
     standing: "#1F2422",
     screen: "#1F2422",
@@ -135,8 +136,10 @@
     out = out.concat(chairsAlong(c.right || 0, it.h, function (v) { return chair(hw + gap, v); }));
     out = out.concat(chairsAlong(c.top || 0, it.w, function (v) { return chair(v, -hh - gap); }));
     out = out.concat(chairsAlong(c.bottom || 0, it.w, function (v) { return chair(v, hh + gap); }));
+    // Bijzettafel: lichter en gestippeld, zonder stoelen / Side table: lighter and dashed, without chairs
     out.push('<rect x="' + r2(-hw) + '" y="' + r2(-hh) + '" width="' + r2(it.w) + '" height="' + r2(it.h) +
-      '" rx="0.05" fill="' + C.wood + '" stroke="' + C.woodEdge + '" stroke-width="0.04"/>');
+      '" rx="0.05" fill="' + (it.side ? C.side : C.wood) + '" stroke="' + C.woodEdge + '" stroke-width="0.04"' +
+      (it.side ? ' stroke-dasharray="0.1 0.07"' : "") + "/>");
     return '<g transform="translate(' + r2(it.x) + " " + r2(it.y) + ") rotate(" + (it.rot || 0) + ')">' + out.join("") + "</g>";
   }
 

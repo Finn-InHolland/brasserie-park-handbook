@@ -54,6 +54,7 @@
       layout: "Opstelling",
       legendTable: "Tafel",
       legendChair: "Stoel",
+      legendSide: "Bijzettafel",
       legendStanding: "Statafel",
       legendScreen: "Scherm",
       legendDoor: "Deur",
@@ -116,6 +117,7 @@
       layout: "Layout",
       legendTable: "Table",
       legendChair: "Chair",
+      legendSide: "Side table",
       legendStanding: "High table",
       legendScreen: "Screen",
       legendDoor: "Door",
@@ -358,6 +360,7 @@
     var current = currentSetup();
     var hasStanding = current.items.some(function (it) { return it.type === "standing"; });
     var hasScreen = current.items.some(function (it) { return it.type === "screen"; });
+    var hasSide = current.items.some(function (it) { return it.side; });
     var cap = ROOM.capacity.filter(function (c) { return c.setup === current.setup; })[0];
     var list = photosOf(current);
     var coverIndex = photoIndex(list, current.cover);
@@ -368,6 +371,7 @@
       '<ul class="legend">' +
       '<li><span class="lg lg-table"></span>' + esc(t("legendTable")) + "</li>" +
       '<li><span class="lg lg-chair"></span>' + esc(t("legendChair")) + "</li>" +
+      (hasSide ? '<li><span class="lg lg-side"></span>' + esc(t("legendSide")) + "</li>" : "") +
       (hasStanding ? '<li><span class="lg lg-standing"></span>' + esc(t("legendStanding")) + "</li>" : "") +
       (hasScreen ? '<li><span class="lg lg-screen"></span>' + esc(t("legendScreen")) + "</li>" : "") +
       '<li><span class="lg lg-door"></span>' + esc(t("legendDoor")) + "</li>" +
