@@ -143,6 +143,22 @@
     return Math.round(n * 100) / 100;
   }
 
+  // Tafels met vaste stoelen (oudere editor) worden tafel + losse stoelen; het origineel blijft ongewijzigd.
+  // Zo tekent de site beide versies goed, ook als iemand met een oude editor heeft opgeslagen.
+  // Tables with attached chairs (older editor) become table + separate chairs; the original stays untouched.
+  // This way the site draws both versions correctly, even if someone saved with an old editor.
+  function separate(items) {
+    var out = [];
+    items.forEach(function (it) {
+      if (it.type !== "table" || !it.chairs) return out.push(it);
+      var table = {};
+      Object.keys(it).forEach(function (k) { if (k !== "chairs") table[k] = it[k]; });
+      out.push(table);
+      out = out.concat(tableChairs(table, it.chairs));
+    });
+    return out;
+  }
+
   function drawTable(it) {
     var hw = it.w / 2, hh = it.h / 2;
     // Bijzettafel: lichter en gestippeld / Side table: lighter and dashed
@@ -178,7 +194,7 @@
     var plan = room.plan;
     var setup = room.setups.filter(function (s) { return s.setup === setupKey; })[0] || room.setups[0];
     var out = drawWalls(plan);
-    (opts.items || setup.items).forEach(function (it, i) {
+    separate(opts.items || setup.items).forEach(function (it, i) {
       out.push(opts.editable ? '<g class="plan-item" data-item="' + i + '">' + drawItem(it, lang) + "</g>" : drawItem(it, lang));
     });
     plan.doors.forEach(function (d) { out = out.concat(drawDoor(plan, d, lang)); });
@@ -202,5 +218,5 @@
       esc(room.name) + '">' + out.join("") + "</svg>";
   }
 
-  window.BP_PLANS = { render: render, tableChairs: tableChairs };
+  window.BP_PLANS = { render: render, tableChairs: tableChairs, separate: separate };
 })();

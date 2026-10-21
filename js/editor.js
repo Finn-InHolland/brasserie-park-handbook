@@ -157,8 +157,9 @@
     return r;
   }
 
+  // Wat nu op de site staat, met losse stoelen / What is on the site now, with separate chairs
   function original(key) {
-    return ROOM.setups.filter(function (s) { return s.setup === key; })[0].items;
+    return PLANS.separate(ROOM.setups.filter(function (s) { return s.setup === key; })[0].items);
   }
 
   function changed(key) {
@@ -174,19 +175,6 @@
     return ed.selected.indexOf(i) !== -1;
   }
 
-  // Oudere opslag had stoelen vast aan tafels: maak er losse stoelen van
-  // Older saves had chairs attached to tables: turn them into separate chairs
-  function separateChairs(list) {
-    var out = [];
-    list.forEach(function (it) {
-      var chairs = it.chairs;
-      delete it.chairs;
-      out.push(it);
-      if (it.type === "table" && chairs) out = out.concat(PLANS.tableChairs(it, chairs));
-    });
-    return out;
-  }
-
   // Alleen opstellingen die echt anders zijn bewaren / Only keep layouts that really differ
   function load() {
     var saved = {};
@@ -198,8 +186,9 @@
     ed.edits = {};
     ROOM.setups.forEach(function (s) {
       if (!Array.isArray(saved[s.setup])) return;
-      var list = separateChairs(saved[s.setup]);
-      if (JSON.stringify(list) !== JSON.stringify(s.items)) ed.edits[s.setup] = list;
+      // Oudere opslag had stoelen vast aan tafels / Older saves had chairs attached to tables
+      var list = PLANS.separate(saved[s.setup]);
+      if (JSON.stringify(list) !== JSON.stringify(original(s.setup))) ed.edits[s.setup] = list;
     });
   }
 
