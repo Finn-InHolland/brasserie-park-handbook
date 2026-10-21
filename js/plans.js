@@ -157,11 +157,17 @@
 
   // ---------- Hoofdfunctie / Main function ----------
 
-  function render(room, setupKey, lang) {
+  // opts.items: andere meubels tekenen (editor) / draw other furniture (editor)
+  // opts.editable: elk meubel in een eigen groep met nummer, zodat de editor het kan pakken
+  // opts.editable: each piece in its own numbered group so the editor can grab it
+  function render(room, setupKey, lang, opts) {
+    opts = opts || {};
     var plan = room.plan;
     var setup = room.setups.filter(function (s) { return s.setup === setupKey; })[0] || room.setups[0];
     var out = drawWalls(plan);
-    setup.items.forEach(function (it) { out.push(drawItem(it, lang)); });
+    (opts.items || setup.items).forEach(function (it, i) {
+      out.push(opts.editable ? '<g class="plan-item" data-item="' + i + '">' + drawItem(it, lang) + "</g>" : drawItem(it, lang));
+    });
     plan.doors.forEach(function (d) { out = out.concat(drawDoor(plan, d, lang)); });
 
     // Waar ligt het park? Buiten de parkwand, voorbij het deurlabel / Where is the park? Outside the park wall, past the door label

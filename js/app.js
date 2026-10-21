@@ -19,6 +19,7 @@
   var STR = {
     nl: {
       appTitle: "Brasserie Park Handboek",
+      editorTitle: "Plattegrond-editor",
       skip: "Naar de inhoud",
       mainNav: "Onderdelen",
       back: "Terug naar start",
@@ -84,6 +85,7 @@
     },
     en: {
       appTitle: "Brasserie Park Handbook",
+      editorTitle: "Floor-plan editor",
       skip: "Skip to content",
       mainNav: "Sections",
       back: "Back to start",
@@ -266,6 +268,8 @@
       return { page: parts[0], setup: SETUP_KEYS.indexOf(parts[1]) !== -1 ? parts[1] : null };
     }
     if (parts[0] === "qr") return { page: "qr" };
+    // Plattegrond-editor, niet in het menu / Floor-plan editor, not in the menu
+    if (parts[0] === "editor") return { page: "editor", setup: SETUP_KEYS.indexOf(parts[1]) !== -1 ? parts[1] : null };
     return { page: "home" };
   }
 
@@ -494,8 +498,9 @@
   // ---------- Kop en menu / Header and menu ----------
 
   function renderChrome(r) {
+    var backTo = r.page === "editor" ? "#/plattegrond/" + state.setup : "#/";
     headerLeft.innerHTML = r.page !== "home"
-      ? '<a class="icon-btn" href="#/" aria-label="' + esc(t("back")) + '">' + ICON.back + "</a>"
+      ? '<a class="icon-btn" href="' + backTo + '" aria-label="' + esc(t("back")) + '">' + ICON.back + "</a>"
       : "";
 
     tabbar.setAttribute("aria-label", t("mainNav"));
@@ -516,12 +521,26 @@
   function render(keepScroll) {
     var r = parse();
     if (r.setup) state.setup = r.setup;
-    view.innerHTML = r.page === "home" ? viewHome() : r.page === "qr" ? viewQr() : viewSection(r.page);
+    view.innerHTML = r.page === "home" ? viewHome()
+      : r.page === "qr" ? viewQr()
+      : r.page === "editor" ? '<div class="wrap editor-page"></div>'
+      : viewSection(r.page);
     view.className = "view page-" + r.page;
     renderChrome(r);
     if (r.page === "qr") drawQrCode();
+    if (r.page === "editor") {
+      window.BP_EDITOR.mount(view.querySelector(".editor-page"), {
+        lang: state.lang,
+        setup: state.setup,
+        setupName: function (key) { return t("setup_" + key); },
+        onSetup: function (key) { state.setup = key; }
+      });
+    }
 
-    var title = r.page === "home" ? ROOM.name : r.page === "qr" ? t("qrPageTitle") : t(SECTION_META[r.page].label) + " · " + ROOM.name;
+    var title = r.page === "home" ? ROOM.name
+      : r.page === "qr" ? t("qrPageTitle")
+      : r.page === "editor" ? t("editorTitle")
+      : t(SECTION_META[r.page].label) + " · " + ROOM.name;
     document.title = title + " · " + t("appTitle");
     if (!keepScroll) window.scrollTo(0, 0);
   }

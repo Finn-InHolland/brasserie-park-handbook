@@ -58,7 +58,22 @@ zodat je direct kunt linken: `#/fotos/borrel`, `#/plattegrond/losse-tafels`.
 
 Getekend op basis van de foto's, zoals je binnenkomt: de brasserie onderaan, het park bovenaan.
 Maten en plekken zijn bij benadering. Wanden, deuren en glas staan in `plan` in
-`js/data.js`; de meubels staan per opstelling bij `items` (`x`/`y` in meters).
+`js/data.js`; de meubels per opstelling staan in `js/layouts.js` (`x`/`y` in meters).
+
+### Plattegrond aanpassen met de editor / Editing with the editor
+
+Open https://finn-inholland.github.io/brasserie-park-handbook/#/editor (staat niet in het menu).
+
+- Tik op een meubel en sleep het naar de goede plek.
+- Draaien in stappen van 5°, verschuiven, stoelen per kant, maat, dupliceren en verwijderen.
+- Toevoegen: tafel voor 4, houten tafel, statafel, stoel, bijzettafel, scherm.
+- Toetsen: pijltjes (Shift = verder), R / Shift+R, Delete, Ctrl+D, Ctrl+Z.
+
+Wijzigingen blijven op je eigen apparaat tot je ze op de site zet:
+
+1. Klik op **Kopieer & open GitHub** (kopieert alle drie de opstellingen).
+2. Log in als Finn-InHolland, klik in de tekst van `js/layouts.js`, Ctrl+A en Ctrl+V.
+3. Klik op **Commit changes**. Na ongeveer een minuut staat het live.
 
 ## QR-code
 

@@ -848,6 +848,158 @@ button {
   color: rgba(248, 247, 239, 0.88);
 }
 
+/* ---------- Plattegrond-editor / Floor-plan editor ---------- */
+.editor-page {
+  padding-top: 32px;
+  padding-bottom: 40px;
+}
+
+.ed-add,
+.ed-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ed-add {
+  margin-top: 16px;
+}
+
+.ed-row-end {
+  margin-top: 16px;
+}
+
+.ed-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ed-sub {
+  margin: 12px 0 6px;
+}
+
+.ed-btn {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.ed-btn:hover {
+  border-color: var(--slate-2);
+}
+
+.ed-sq {
+  min-width: 38px;
+  padding: 0;
+}
+
+.ed-danger {
+  color: var(--terra-dark);
+  border-color: #EBD3C4;
+}
+
+.ed-canvas svg {
+  touch-action: none;
+  user-select: none;
+}
+
+.ed-canvas .plan-item {
+  cursor: grab;
+}
+
+.ed-canvas .plan-item:active {
+  cursor: grabbing;
+}
+
+.ed-outline {
+  fill: rgba(196, 120, 82, 0.08);
+  stroke: var(--terra);
+  stroke-width: 0.06;
+  stroke-dasharray: 0.15 0.1;
+  pointer-events: none;
+}
+
+.ed-panel {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.ed-hint {
+  font-weight: 600;
+}
+
+.ed-keys {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.ed-pos {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ed-step {
+  display: grid;
+  grid-template-columns: 1fr auto 64px auto;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ed-step output {
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ed-save {
+  margin-top: 28px;
+  padding: 18px;
+  background: var(--sage-light);
+  border-radius: var(--radius);
+}
+
+.ed-save ol {
+  margin: 8px 0 16px;
+  padding-left: 20px;
+}
+
+.ed-save li {
+  margin-bottom: 4px;
+}
+
+.ed-status {
+  font-weight: 600;
+}
+
+.ed-copy-msg {
+  font-weight: 600;
+  color: var(--sage-dark);
+}
+
+.ed-output {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: 12px/1.4 Consolas, "Courier New", monospace;
+  background: #fff;
+}
+
 /* ---------- Fotoviewer / Photo viewer ---------- */
 .viewer {
   position: fixed;
@@ -1199,6 +1351,19 @@ button {
   }
 
   .plan-side {
+    position: sticky;
+    top: 140px;
+    margin-top: 0;
+  }
+
+  .ed-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ed-panel {
     position: sticky;
     top: 140px;
     margin-top: 0;
